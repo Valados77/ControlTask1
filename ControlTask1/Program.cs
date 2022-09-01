@@ -4,7 +4,15 @@
     {
         byte firstNum = EnterStringNum("Enter first num: ");
         byte secondNum = EnterStringNum("Enter second num: ");
-        sbyte result = EnterStringOperation("Enter operator: ", firstNum, secondNum, out string? operation);
+
+        sbyte? result = null;
+        string? operation = null;
+        while (result == null)
+        {
+            operation = EnterStringOperation("Enter operator: ");
+            result = Operations(operation, firstNum, secondNum);
+        }
+
         Console.WriteLine("Result: {0} {1} {2} = {3}", firstNum, operation, secondNum, result);
     }
 
@@ -63,19 +71,12 @@
         return number;
     }
 
-    private static sbyte EnterStringOperation(string? massege, byte firstNum, byte secondNum, out string? operation)
+    private static string? EnterStringOperation(string? massege)
     {
         Console.Write(massege);
-        sbyte? answer;
-        do
-        {
-            operation = Console.ReadLine();
-            answer = Operations(operation, firstNum, secondNum);
-        }
-        while (answer == null);
-        return (sbyte)answer;
+        string? answer = Console.ReadLine();
+        return answer;
     }
-
 
     private static sbyte? Operations(string? operation, byte firstNum, byte secondNum)
     {
