@@ -10,7 +10,7 @@
         while (result == null)
         {
             operation = EnterStringOperation("Enter operator: ");
-            result = Operations(operation, firstNum, secondNum);
+            result = Calculate(operation, firstNum, secondNum);
         }
 
         Console.WriteLine("Result: {0} {1} {2} = {3}", firstNum, operation, secondNum, result);
@@ -78,7 +78,7 @@
         return answer;
     }
 
-    private static sbyte? Operations(string? operation, byte firstNum, byte secondNum)
+    private static sbyte? Calculate(string? operation, byte firstNum, byte secondNum)
     {
         sbyte? answer;
         switch (operation)
