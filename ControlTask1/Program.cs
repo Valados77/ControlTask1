@@ -5,13 +5,8 @@
         byte firstNum = EnterStringNum("Enter first num: ");
         byte secondNum = EnterStringNum("Enter second num: ");
 
-        sbyte? result = null;
-        string? operation = null;
-        while (result == null)
-        {
-            operation = EnterStringOperation("Enter operator: ");
-            result = Calculate(operation, firstNum, secondNum);
-        }
+        string? operation = EnterStringOperation("Enter operator: ");
+        sbyte? result = Calculate(operation, firstNum, secondNum);
 
         Console.WriteLine("Result: {0} {1} {2} = {3}", firstNum, operation, secondNum, result);
     }
@@ -65,7 +60,7 @@
                 break;
             default:
                 number = null;
-                Console.WriteLine("Сonversion error. Enter from zero to nine");
+                Console.WriteLine("Сonversion error. Enter from zero to nine.");
                 break;
         }
         return number;
@@ -74,7 +69,13 @@
     private static string? EnterStringOperation(string? massege)
     {
         Console.Write(massege);
-        string? answer = Console.ReadLine();
+        string? answer = null;
+        do
+        {
+            answer = Console.ReadLine();
+            if (answer != "+" && answer != "-" && answer != "*" && answer != "/")
+                Console.WriteLine("Operator error. Enter +, -, *, /.");
+        } while(answer != "+" && answer != "-" && answer != "*" && answer != "/");
         return answer;
     }
 
@@ -95,7 +96,7 @@
             case "/":
                 if (secondNum == 0)
                 {
-                    Console.WriteLine("Dividing by zero is not allowed. Enter +, -, *.");
+                    Console.WriteLine("Dividing by zero is not allowed.");
                     answer = null;
                     break;
                 }
